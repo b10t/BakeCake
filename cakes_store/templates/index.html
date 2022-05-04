@@ -87,7 +87,7 @@
             <v-form :validation-schema="RegSchema"
               class="modal-body position-relative d-flex flex-column align-items-center px-5 pb-4" @submit="RegSubmit">
               <v-field v-if="RegInput !== 'Регистрация успешна'" v-model="RegInput" name="reg" type="text" id="reg"
-                :placeholder="Step === `Number` ? `Введите ваш номер` : `Введите код`"
+                :placeholder="Step === `Number` ? `Введите ваш email` : `Введите код`"
                 class="form-control cake__textinput"></v-field>
               <v-field v-if="Step === 'Number'" v-model="RegInput" type="phone" name="phone_format" class="d-none">
               </v-field>
