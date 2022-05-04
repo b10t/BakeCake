@@ -1,4 +1,5 @@
 Django==4.0.4
-environs==9.5.0
 django-phonenumber-field==6.1.0
 django-phonenumbers==1.0.1
+django-sslserver==0.22
+environs==9.5.0
