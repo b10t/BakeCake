@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Cake(models.Model):
@@ -64,9 +65,14 @@ class Order(models.Model):
     cake = models.ForeignKey(
         Cake, verbose_name='Торт', on_delete=models.CASCADE,
     )
-    comment = models.TextField('Комментарий', blank=True)
+    customer_name = models.CharField('Имя', max_length=60)
+    customer_email = models.EmailField('Электронная почта', max_length=254)
+    customer_phone = PhoneNumberField(
+        verbose_name='Номер телефона', region='RU'
+    )
     delivery_date = models.DateField('Дата доставки')
     delivery_time = models.TimeField('Время доставки')
+    comment = models.TextField('Комментарий', blank=True)
 
     class Meta:
         verbose_name = 'Заказчик'
