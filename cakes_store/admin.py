@@ -9,4 +9,4 @@ class CakeAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', )
+    list_display = ('customer_name', 'customer_phone', )

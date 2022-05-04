@@ -70,9 +70,13 @@ class Order(models.Model):
     customer_phone = PhoneNumberField(
         verbose_name='Номер телефона', region='RU'
     )
+    customer_address = models.CharField('Адрес', max_length=250)
     delivery_date = models.DateField('Дата доставки')
     delivery_time = models.TimeField('Время доставки')
     comment = models.TextField('Комментарий', blank=True)
+
+    def __str__(self):
+        return self.customer_name
 
     class Meta:
         verbose_name = 'Заказчик'
