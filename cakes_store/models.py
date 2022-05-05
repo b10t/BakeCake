@@ -1,6 +1,18 @@
 from django.contrib.auth.models import User
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
+
+
+class User(AbstractUser):
+    email = models.EmailField(
+        _("email address"),
+        unique=True,
+    )
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
 
 class Cake(models.Model):

@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'cakes_store',
 ]
 
+AUTH_USER_MODEL = 'cakes_store.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -132,3 +134,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'bake.cake.dvm8@gmail.com'
+EMAIL_HOST_PASSWORD = 'Cake12345'
+EMAIL_PORT = 587
