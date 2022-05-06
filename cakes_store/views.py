@@ -15,10 +15,12 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+
 def reg(request):
     context = {
         'Step': 'Number',
     }
+
     if request.method == 'POST':
         email = request.POST['REG']
         password = get_random_password()
@@ -43,3 +45,19 @@ def get_random_password():
     allowed_chars = string.ascii_lowercase + string.digits + string.ascii_uppercase
     password = get_random_string(password_len, allowed_chars=allowed_chars)
     return password
+
+
+    if request.method == 'POST':
+        return render(request, 'index.html', context)
+        # form = RegisterUserForm_fiz(request.POST)
+        # if form.is_valid():
+        #     contract = form.save()
+        #     return render(request, 'registration/register_ok.html')
+        # else:
+        #     return render(request, 'registration/register_fiz.html', {'form': form})
+    else:
+        return render(request, 'index.html', context)
+
+        # form = RegisterUserForm_fiz()
+        # return render(request, 'registration/register_fiz.html', {'form': form})
+    # return render(request, 'main/uconstruction.html')
