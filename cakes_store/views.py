@@ -3,7 +3,7 @@ from django.utils.crypto import get_random_string
 from django.contrib.auth import authenticate, login
 from django.views import View
 from django.shortcuts import render, redirect
-from cakes_store.models import User
+from cakes_store.models import User, Order
 from django.core.mail import EmailMessage
 from cakes_store.forms import UserCreationForm
 from django.http import HttpResponse
@@ -15,6 +15,14 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+def lk(request):
+    users = User.objects.all()
+    customer = Order.objects.all()
+    context = {
+        'users': users,
+        'customer': customer,
+    }
+    return render(request, 'lk.html', context)
 
 def reg(request):
     context = {
@@ -47,17 +55,6 @@ def get_random_password():
     return password
 
 
-    if request.method == 'POST':
-        return render(request, 'index.html', context)
-        # form = RegisterUserForm_fiz(request.POST)
-        # if form.is_valid():
-        #     contract = form.save()
-        #     return render(request, 'registration/register_ok.html')
-        # else:
-        #     return render(request, 'registration/register_fiz.html', {'form': form})
-    else:
-        return render(request, 'index.html', context)
-
-        # form = RegisterUserForm_fiz()
-        # return render(request, 'registration/register_fiz.html', {'form': form})
-    # return render(request, 'main/uconstruction.html')
+def login(request):
+    context = {}
+    return render(request, 'login.html', context)
