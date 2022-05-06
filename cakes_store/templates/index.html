@@ -80,7 +80,8 @@
               <label for="reg" class="modal-title font_Gogh fs_40 cake_blue" id="RegModalLabel">Вход /
                 Регистрация</label>
             </div>
-            <form class="d-none">
+            <form class="d-none" action="/reg/" id="reg_form" method="post">
+              {% csrf_token %}
               <input v-model="RegInput" type="text" name="REG">
               <button type="submit" ref="HiddenFormSubmitReg">reg</button>
             </form>
