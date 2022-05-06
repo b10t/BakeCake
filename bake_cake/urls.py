@@ -8,5 +8,5 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('signup/', views.Signup.as_view(), name='signup'),
+    path('reg/', views.reg, name='reg'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
