@@ -11,6 +11,9 @@
               {% if user.is_authenticated %}
               <a class="fw-lighter cake_blue fs_25" href="{% url 'logout' %}">Выйти</a>
               {% else %}
+              <!-- {% if error %}
+              <p class="me-2  mt-4 mb-1 cake_blue" >{{ error }}</p>
+              {% endif %} -->
               <label class="me-2  mt-4 mb-1 cake_blue" style="font-size: 26px">Email</label>
               <div class="col-12 col-md-12 col-lg-12 pt-2">
                 <input class="form-control cake__textinput" type="text" name="REG" id="REG" placeholder="Введите e-mail">

@@ -1,6 +1,6 @@
 import string
 from django.utils.crypto import get_random_string
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from cakes_store.models import User, Order
 from django.core.mail import EmailMessage
 
@@ -30,20 +30,26 @@ def get_random_password():
 
 def signup(request):
     context = {}
-    if request.method == 'POST':
-        email = request.POST['REG']
-        password = get_random_password()
+    try:
+        if request.method == 'POST':
+            email = request.POST['REG']
+            password = get_random_password()
 
-        User.objects._create_user(
-            password=password,
-            email=request.POST['REG'],
-            username=request.POST['REG'],
-        )
-        subject_message = 'CakeBake'
-        message = f'Ваш пароль: {password}'
-        EmailMessage(
-            subject=subject_message,
-            body=message,
-            to=[request.POST['REG']],
-            ).send()
-    return render(request, 'signup.html', context)
+            User.objects._create_user(
+                password=password,
+                email=request.POST['REG'],
+                username=request.POST['REG'],
+            )
+            subject_message = 'CakeBake'
+            message = f'Ваш пароль: {password}'
+            EmailMessage(
+                subject=subject_message,
+                body=message,
+                to=[request.POST['REG']],
+                ).send()
+            return redirect('login')
+        if request.method == 'GET':
+            return render(request, 'signup.html', context)
+    except Exception as error:
+        context = {'error': error}
+        return render(request, 'signup.html', context)
