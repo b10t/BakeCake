@@ -1,15 +1,13 @@
 import string
 from django.utils.crypto import get_random_string
 from django.shortcuts import render, redirect
-from cakes_store.models import User, Order
+from cakes_store.models import User, Cake
 from django.core.mail import EmailMessage
 
 
 
 def index(request):
-    context = {
-        'Step': 'Number'
-    }
+    context = {}
     return render(request, 'index.html', context)
 
 def lk(request):

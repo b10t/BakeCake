@@ -150,7 +150,7 @@
               </span>
               <span class="z-index-1 fs_40 cake_pink text-end mt-5" id="cost">[[ Cost ]]₽</span>
             </div>
-            <div class="d-flex align-items-center flex-wrap mb-3">
+            <div action="levels" id="reg_form" method="post" class="d-flex align-items-center flex-wrap mb-3">
               <span class="me-3 fs_40 cake_blue">Количество уровней</span>
               <v-field v-model="Levels" type="radio" name="lvls" id="num1" value="1" class="d-none cake__input">
               </v-field>
@@ -315,6 +315,7 @@
                   <label for="name" class="my-1 fs_40 cake_blue">Имя</label>
                   <label for="phone" class="my-1 fs_40 cake_blue">Телефон</label>
                   <label for="email" class="my-1 fs_40 cake_blue">Почта</label>
+                  <label for="promo" class="my-1 fs_40 cake_blue">Промокод</label>
                 </div>
                 <div class="col-6 col-lg-4 d-flex flex-column">
                   <div class="position-relative pb-1">
@@ -336,6 +337,13 @@
                       id="email" placeholder="Введите почту" class="form-control my-3 cake__textinput"></v-field>
                     <v-field v-model="Email" type="email" name="email_format" class="d-none"></v-field>
                     <error-message name="email_format" class="position-absolute bottom-0 cake_pink fs_12">
+                    </error-message>
+                  </div>
+                  <div class="position-relative pb-1">
+                    <v-field v-model="promo" :class="Promo ? 'cake__border_blue': ''" type="Promo" name="Promo"
+                      id="Promo" placeholder="Введите промокод" class="form-control my-3 cake__textinput"></v-field>
+                    <v-field v-model="Promo" type="promo" name="promo_format" class="d-none"></v-field>
+                    <error-message name="promo_format" class="position-absolute bottom-0 cake_pink fs_12">
                     </error-message>
                   </div>
                 </div>

@@ -29,6 +29,12 @@ Vue.createApp({
                 },
             },
             schema2: {
+                promo: (value) => {
+                    if (value) {
+                        return true;
+                    }
+                    return " промокод";
+                },
                 name: (value) => {
                     if (value) {
                         return true;
@@ -40,6 +46,16 @@ Vue.createApp({
                         return true;
                     }
                     return " телефон";
+                },
+                promo_format: (value) => {
+                    const regex = /^[A-Z0-9._%+-]+[A-Z0-9.-]+$/i;
+                    if (!value) {
+                        return true;
+                    }
+                    if (!regex.test(value)) {
+                        return "⚠ Формат промокода нарушен";
+                    }
+                    return true;
                 },
                 name_format: (value) => {
                     const regex = /^[a-zA-Zа-яА-Я]+$/;
