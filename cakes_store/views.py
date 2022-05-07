@@ -1,12 +1,9 @@
 import string
 from django.utils.crypto import get_random_string
-from django.contrib.auth import authenticate, login
-from django.views import View
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from cakes_store.models import User, Order
 from django.core.mail import EmailMessage
-from cakes_store.forms import UserCreationForm
-from django.http import HttpResponse
+
 
 
 def index(request):
