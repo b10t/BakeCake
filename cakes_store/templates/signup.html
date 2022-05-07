@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-header mb-6">
+  <div class="row mt-5">
+    <div class="col-12 col-xxl-12 d-flex justify-content-center">
+            <form action="/signup/" id="reg_form" method="post">
+
+              {% csrf_token %}
+              {% if user.is_authenticated %}
+              <a class="fw-lighter cake_blue fs_25" href="{% url 'logout' %}">Выйти</a>
+              {% else %}
+              <label class="me-2  mt-4 mb-1 cake_blue" style="font-size: 26px">Email</label>
+              <div class="col-12 col-md-12 col-lg-12 pt-2">
+                <input class="form-control cake__textinput" type="text" name="REG" id="REG" placeholder="Введите e-mail">
+              </div>
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn_hover text-white rounded-pill mt-3 px-5 shadow-none cake__button cake__bg_pink" style="width:100%">Зарегистрироваться</button>
+              </div>
+            </form>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-12 col-xxl-12 d-flex justify-content-center">
+      <a class="fw-lighter cake_blue fs_12" href="{% url 'login' %}">Войти</a></span>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -2,14 +2,14 @@ from cakes_store import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('reg/', views.reg, name='reg'),
     path('', views.index, name='index'),
-    path('lk', views.lk, name='lk'),
-    path('login', views.login, name='login'),
+    path('lk/', views.lk, name='lk' ),
+    path('signup/', views.signup, name='signup'),
+    path('users/', include('django.contrib.auth.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

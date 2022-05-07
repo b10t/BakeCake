@@ -23,6 +23,12 @@ body {
     display: grid;
     grid-template-rows: auto 1fr auto;
 }
+.login__cake {
+    background-color: #D660CC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .mt-header {
     margin-top: calc(58px + 1.6rem);
 }

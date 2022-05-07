@@ -46,9 +46,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'phonenumber_field',
     'cakes_store',
+    'widget_tweaks',
 ]
 
 AUTH_USER_MODEL = 'cakes_store.User'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

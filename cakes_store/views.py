@@ -16,19 +16,23 @@ def index(request):
     return render(request, 'index.html', context)
 
 def lk(request):
-    users = User.objects.all()
-    customer = Order.objects.all()
-    context = {
-        'users': users,
-        'customer': customer,
-    }
+    context = {}
     return render(request, 'lk.html', context)
 
-def reg(request):
-    context = {
-        'Step': 'Number',
-    }
+def login(request):
+    context = {}
+    return render(request, 'login.html', context)
 
+
+def get_random_password():
+    password_len = 8
+    allowed_chars = string.ascii_lowercase + string.digits + string.ascii_uppercase
+    password = get_random_string(password_len, allowed_chars=allowed_chars)
+    return password
+
+
+def signup(request):
+    context = {}
     if request.method == 'POST':
         email = request.POST['REG']
         password = get_random_password()
@@ -45,16 +49,4 @@ def reg(request):
             body=message,
             to=[request.POST['REG']],
             ).send()
-        return render(request, 'index.html', context)
-
-
-def get_random_password():
-    password_len = 8
-    allowed_chars = string.ascii_lowercase + string.digits + string.ascii_uppercase
-    password = get_random_string(password_len, allowed_chars=allowed_chars)
-    return password
-
-
-def login(request):
-    context = {}
-    return render(request, 'login.html', context)
+    return render(request, 'signup.html', context)
