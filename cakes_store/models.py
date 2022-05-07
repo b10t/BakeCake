@@ -98,32 +98,62 @@ class Cake(models.Model):
         'Топпинг', choices=CAKE_TOPPINGS, max_length=20,
     )
     price = models.DecimalField('Цена', max_digits=8, decimal_places=2)
+    shape = models.CharField('Форма', choices=CAKE_SHAPES, max_length=20, default='Circle')
+
+    def __str__(self):
+        return f'{self.title}, {self.berries}, {self.decor}, {self.levels}, {self.toppings}, {self.shape}'
 
     class Meta:
         verbose_name = 'Торт'
         verbose_name_plural = 'Торты'
 
 
+def save_cake(levels, shape, toppings, berries, decor, title, price):
+    new_cake = Cake(
+        levels=levels,
+        shape=shape,
+        toppings=toppings,
+        berries=berries,
+        decor=decor,
+        title=title,
+        price=price
+    )
+    new_cake.save()
+    return new_cake
+
+
 class Order(models.Model):
     customer = models.ForeignKey(
-        User, verbose_name='Заказчик', on_delete=models.DO_NOTHING, related_name='ordering'
+        User, verbose_name='Заказчик', on_delete=models.DO_NOTHING, related_name='order_customer'
     )
     cake = models.ForeignKey(
-        Cake, verbose_name='Торт', on_delete=models.CASCADE,
+        Cake, verbose_name='Торт', on_delete=models.CASCADE, related_name='order_cake'
     )
     customer_name = models.CharField('Имя', max_length=60)
     customer_email = models.EmailField('Электронная почта', max_length=254)
-    customer_phone = PhoneNumberField(
-        verbose_name='Номер телефона', region='RU'
-    )
+    customer_phone = PhoneNumberField(verbose_name='Номер телефона', region='RU')
     customer_address = models.CharField('Адрес', max_length=250)
     delivery_date = models.DateField('Дата доставки')
     delivery_time = models.TimeField('Время доставки')
     comment = models.TextField('Комментарий', blank=True)
 
     def __str__(self):
-        return self.customer_name
+        return f'{self.customer.username}. Торт: "{self.cake}"'
 
     class Meta:
-        verbose_name = 'Заказчик'
-        verbose_name_plural = 'Заказчики'
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
+
+
+def save_order(cake, customer, phone, address, delivery_date, delivery_time, comment):
+    new_order = Order(
+        cake=cake,
+        customer=customer,
+        customer_phone=phone,
+        customer_address=address,
+        delivery_date=delivery_date,
+        delivery_time=delivery_time,
+        comment=comment
+    )
+    new_order.save()
+    return new_order
