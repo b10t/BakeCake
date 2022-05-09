@@ -30,10 +30,12 @@ Vue.createApp({
             },
             schema2: {
                 promo: (value) => {
-                    if (value) {
-                        return true;
-                    }
-                    return " промокод";
+                    // if (value) {
+                    //     return true;
+                    // }
+                    // return " промокод";
+
+                    return true;
                 },
                 name: (value) => {
                     if (value) {
@@ -157,6 +159,7 @@ Vue.createApp({
             Name: "",
             Phone: null,
             Email: null,
+            Promo: null,
             Address: null,
             Dates: null,
             Time: null,
@@ -165,9 +168,15 @@ Vue.createApp({
     },
     methods: {
         ToStep4() {
+            console.log("ToStep4");
             this.Designed = true;
             setTimeout(() => this.$refs.ToStep4.click(), 0);
         },
+        // HiddenFormSubmit() {
+        //     console.log("HiddenFormSubmit");
+        //     this.Designed = true;
+        //     setTimeout(() => this.$refs.HiddenFormSubmit.click(), 0);
+        // },
     },
     computed: {
         Cost() {

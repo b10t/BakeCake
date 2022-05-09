@@ -51,3 +51,10 @@ def signup(request):
     except Exception as error:
         context = {'error': error}
         return render(request, 'signup.html', context)
+
+
+def processing_orders(request):
+    """Обработка заказа"""
+    if request.method == 'POST':
+        context = {}
+        return render(request, 'index.html', context)
