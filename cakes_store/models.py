@@ -123,16 +123,10 @@ def save_cake(levels, shape, toppings, berries, decor, title, price):
 
 
 class Order(models.Model):
-    customer = models.ForeignKey(
-        User, verbose_name='Заказчик', on_delete=models.DO_NOTHING, related_name='order_customer'
-    )
     cake = models.ForeignKey(
         Cake, verbose_name='Торт', on_delete=models.CASCADE, related_name='order_cake'
     )
-    customer_name = models.CharField('Имя', max_length=60)
-    customer_email = models.EmailField('Электронная почта', max_length=254)
-    customer_phone = PhoneNumberField(verbose_name='Номер телефона', region='RU')
-    customer_address = models.CharField('Адрес', max_length=250)
+    order_address = models.CharField('Адрес', max_length=250)
     delivery_date = models.DateField('Дата доставки')
     delivery_time = models.TimeField('Время доставки')
     comment = models.TextField('Комментарий', blank=True)
@@ -143,6 +137,18 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+
+
+class Customer(models.Model):
+    order = models.ForeignKey(
+        Order, verbose_name='Заказ', on_delete=models.CASCADE,
+    )
+    customer = models.OneToOneField(
+        User, verbose_name='Заказчик', on_delete=models.DO_NOTHING, related_name='order_customer'
+    )
+    customer_name = models.CharField('Имя', max_length=60)
+    customer_email = models.EmailField('Электронная почта', max_length=254)
+    customer_phone = PhoneNumberField(verbose_name='Номер телефона', region='RU')
 
 
 def save_order(cake, customer, phone, address, delivery_date, delivery_time, comment):
