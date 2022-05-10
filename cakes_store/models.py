@@ -124,7 +124,7 @@ def save_cake(levels, shape, toppings, berries, decor, title, price):
 
 class Order(models.Model):
     customer = models.OneToOneField(
-        'Customer', verbose_name='Покупатель', on_delete=models.DO_NOTHING, null=True,
+        'Customer', verbose_name='Покупатель', on_delete=models.DO_NOTHING, null=True, related_name='customer_cake'
     )
     cake = models.OneToOneField(
         Cake, verbose_name='Торт', on_delete=models.CASCADE, related_name='order_cake'
