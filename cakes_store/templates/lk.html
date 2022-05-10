@@ -26,10 +26,68 @@
 				</div>
 			</v-form>
 			<h2 class="fs_40 cake_pink mt-5">Мои заказы</h2>
-			<span class="cake_grey">У вас еще нет заказов.</span>
-			<p class="cake_grey">Вы можете добавить торт из <a href="./index.html#step2" class="text-decoration-none cake_pink">Каталога</a> или <a href="./index.html#step3" class="text-decoration-none cake_pink">Создать свой</a>.</p>
-			<span class="cake_grey">Есть вопросы?</span>
-			<span class="cake_grey">Воспользуйтесь нашим <a href="https://vk.com/devmanorg" class="text-decoration-none cake_pink">чат-ботом</a>.</span>
+			<section class="my-2">
+				<span class="cake_blue lk__order d-flex" data-bs-toggle="modal" data-bs-target="#OrderModal2">
+					<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
+						<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+					</svg>
+					<span class="ms-1">#2239400223 Свадебный торт “VIP”</span>
+				</span>
+				<aside class="modal fade" id="OrderModal2" tabindex="-1" aria-labelledby="ModalLabel2" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title cake_pink" id="ModalLabel2">#2239400223 Свадебный торт “VIP””</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<span class="cake_blue">Уровней: 1</span><br>
+								<span class="cake_blue">Форма: круг</span><br>
+								<span class="cake_blue">Топпинг: без</span><br>
+								<span class="cake_blue">Ягоды: нет</span><br>
+								<span class="cake_blue">Декор: нет</span><br>
+								<span class="cake_blue">Без надписи</span><br>
+								<span class="cake_pink">Цена: 1000₽</span>
+							</div>
+							<div class="modal-footer d-flex justify-content-between">
+								<span class="cake_blue d-flex">Статус: В доставке</span>
+								<span class="cake_blue d-flex align-items-center">Время доставки: ?</span>
+							</div>
+						</div>
+					</div>
+				</aside>
+			</section>
+			<section class="my-2">
+				<span class="cake_blue lk__order d-flex" data-bs-toggle="modal" data-bs-target="#OrderModal1">
+					<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+						<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+					</svg>
+					<span class="ms-1">#45575879537 Торт “Черепаха”</span>
+				</span>
+				<aside class="modal fade" id="OrderModal1" tabindex="-1" aria-labelledby="ModalLabel1" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title cake_pink" id="ModalLabel1">#45575879537 Торт “Черепаха”</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<span class="cake_blue">Уровней: 2</span><br>
+								<span class="cake_blue">Форма: квадрат</span><br>
+								<span class="cake_blue">Топпинг: белый соус</span><br>
+								<span class="cake_blue">Ягоды: безе</span><br>
+								<span class="cake_blue">Декор: нет</span><br>
+								<span class="cake_blue">С днём рождения</span><br>
+								<span class="cake_pink">Цена: 2550₽</span>
+							</div>
+							<div class="modal-footer d-flex justify-content-between">
+								<span class="cake_blue">Статус: Выполнен</span>
+								<span class="cake_blue">Время доставки: ?</span>
+							</div>
+						</div>
+					</div>
+				</aside>
+			</section>
 			<a class="btn text-white rounded-pill align-self-end px-5 mt-3 shadow-none cake__button cake__bg_pink" href="{% url 'logout' %}">Выйти</a>
 		</div>
 
