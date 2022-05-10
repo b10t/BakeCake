@@ -1,8 +1,9 @@
 import re
 import string
+from turtle import fd
 from django.utils.crypto import get_random_string
 from django.shortcuts import render, redirect
-from cakes_store.models import User, Customer
+from cakes_store.models import User, Customer, Order
 from django.core.mail import EmailMessage
 
 
@@ -11,9 +12,19 @@ def index(request):
     context = {}
     return render(request, 'index.html', context)
 
+
 def lk(request):
     context = {}
-    return render(request, 'lk.html', context)
+    user = request.user
+    try:
+        if user.is_authenticated:
+            order = Order.objects.get(customer=user.order_customer)
+            context = {
+                'order': order,
+            }
+        return render(request, 'lk.html', context)
+    except Exception:
+        return render(request, 'lk.html', context)
 
 
 def login(request):
