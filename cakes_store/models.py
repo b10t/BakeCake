@@ -135,7 +135,7 @@ class Order(models.Model):
     comment = models.TextField('Комментарий', blank=True)
 
     def __str__(self):
-        return f'{self.customer.username}. Торт: "{self.cake}"'
+        return self.customer.customer_name
 
     class Meta:
         verbose_name = 'Заказ'
