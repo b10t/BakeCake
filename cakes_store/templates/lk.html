@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-{% block title %}Личный кабинет{% endblock %}
+{% block title %}{{ name }}{% endblock %}
 <div class="container mt-header mb-5">
 	<div class="row mt-5">
 		<div class="col-12 col-xxl-6 d-flex justify-content-center">
 			<div><img src="{% static 'img/Cake2.png' %}" alt=""></div>
 		</div>
 		<div class="col-12 col-xxl-6 d-flex flex-column justify-content-center align-items-center align-items-xxl-start" id="LK">
-			<form class="d-none">
+			<form class="d-none" action="/lk/" method="post" id="lk">
+				{% csrf_token %}
 				<input v-model="Name" name="NAME">
 				<input v-model="Phone" name="PHONE">
 				<input v-model="Email" name="EMAIL">
@@ -42,15 +43,15 @@
 					</ul>
 					<ul class="list-group">
 						<li class="list-group-item border-0 py-61 position-relative">
-							<v-field v-model="Name" type="text" name="name_format" id="name" :readonly="!Edit" class="form-control my-2 i cake__textinput"></v-field>
+							<v-field v-model="Name" type="text" name="name_format" id="name" :readonly="!Edit" class="form-control my-2 i cake__textinput">{{ name }}</v-field>
 							<error-message name="name_format" class="position-absolute bottom-0 cake_pink fs_12"></error-message>
 						</li>
 						<li class="list-group-item border-0 py-61 position-relative">
-							<v-field v-model="Phone" type="text" name="phone_format" id="phone" :readonly="!Edit" class="form-control my-2 cake__textinput"></v-field>
+							<v-field v-model="Phone" type="text" name="phone_format" id="phone" :readonly="!Edit" class="form-control my-2 cake__textinput">{{ phone }}</v-field>
 							<error-message name="phone_format" class="position-absolute bottom-0 cake_pink fs_12"></error-message>
 						</li>
 						<li class="list-group-item border-0 py-61 position-relative">
-							<v-field v-model="Email" type="text" name="email_format" id="email" :readonly="!Edit" class="form-control my-2 cake__textinput"></v-field>
+							<v-field v-model="Email" type="text" name="email_format" id="email" :readonly="!Edit" class="form-control my-2 cake__textinput">{{ email }}</v-field>
 							<error-message name="email_format" class="position-absolute bottom-0 cake_pink fs_12"></error-message>
 						</li>
 					</ul>
