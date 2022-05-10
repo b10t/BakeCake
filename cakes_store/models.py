@@ -101,7 +101,7 @@ class Cake(models.Model):
     shape = models.CharField('Форма', choices=CAKE_SHAPES, max_length=20, default='Circle')
 
     def __str__(self):
-        return f'{self.title}, {self.berries}, {self.decor}, {self.levels}, {self.toppings}, {self.shape}'
+        return f'{self.berries}, {self.decor}, {self.levels}, {self.toppings}, {self.shape}'
 
     class Meta:
         verbose_name = 'Торт'
