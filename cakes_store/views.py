@@ -14,24 +14,6 @@ def index(request):
 def lk(request):
     context = {}
     return render(request, 'lk.html', context)
-    # if request.method == 'POST':
-    #     name = request.POST['NAME']
-    #     phone = request.POST['PHONE']
-    #     email = request.POST['EMAIL']
-    #     Customer.objects.get_or_create(
-    #         customer_name=name,
-    #         customer_email=email,
-    #         customer_phone=phone,
-    #         customer_id=User.objects.get(email=email).id,
-    #     )
-    #     context = {
-    #         'name': name,
-    #         'phone': phone,
-    #         'email': email,
-    #     }
-    #     return render(request, 'lk.html', context)
-    # if request.method == 'GET':
-    #     return render(request, 'lk.html', context)
 
 
 def login(request):

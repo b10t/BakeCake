@@ -150,6 +150,10 @@ class Customer(models.Model):
     customer_email = models.EmailField('Электронная почта', max_length=254)
     customer_phone = PhoneNumberField(verbose_name='Номер телефона', region='RU')
 
+    def __str__(self):
+        return self.customer_name
+
+
 
 def save_order(cake, customer, phone, address, delivery_date, delivery_time, comment):
     new_order = Order(

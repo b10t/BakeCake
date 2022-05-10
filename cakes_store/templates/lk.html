@@ -8,9 +8,10 @@
 			<div><img src="{% static 'img/Cake2.png' %}" alt=""></div>
 		</div>
 		<div class="col-12 col-xxl-6 d-flex flex-column justify-content-center align-items-center align-items-xxl-start" id="LK">
-			<form class="d-none" action="/lk/" method="post" id="lk">
-				{% csrf_token %}
-				<input v-model="Name" name="NAME">
+			<!-- <form class="d-none" action="/lk/" method="post" id="lk">
+				{% csrf_token %} -->
+		{% if user.is_authenticated %}
+				<!-- <input v-model="Name" name="NAME">
 				<input v-model="Phone" name="PHONE">
 				<input v-model="Email" name="EMAIL">
 				<button type="submit" ref="HiddenFormSubmit">Apply Changes</button>
@@ -28,31 +29,17 @@
 							<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
 						</svg>
 					</button>
-				</div>
+				</div> -->
 				<div class="d-flex">
 					<ul class="list-group">
 						<li class="list-group-item border-0 ps-0">
-							<span class="fs_40 cake_blue">Имя</span>
+							<span class="fs_40 cake_blue">{{ user.order_customer.customer_name }}</span>
 						</li>
 						<li class="list-group-item border-0 ps-0">
-							<h1 class="fs_40 cake_blue">Телефон</h1>
+							<h1 class="fs_40 cake_blue">{{ user.order_customer.customer_phone }}</h1>
 						</li>
 						<li class="list-group-item border-0 ps-0">
-							<h1 class="fs_40 cake_blue">Почта</h1>
-						</li>
-					</ul>
-					<ul class="list-group">
-						<li class="list-group-item border-0 py-61 position-relative">
-							<v-field v-model="Name" type="text" name="name_format" id="name" :readonly="!Edit" class="form-control my-2 i cake__textinput">{{ name }}</v-field>
-							<error-message name="name_format" class="position-absolute bottom-0 cake_pink fs_12"></error-message>
-						</li>
-						<li class="list-group-item border-0 py-61 position-relative">
-							<v-field v-model="Phone" type="text" name="phone_format" id="phone" :readonly="!Edit" class="form-control my-2 cake__textinput">{{ phone }}</v-field>
-							<error-message name="phone_format" class="position-absolute bottom-0 cake_pink fs_12"></error-message>
-						</li>
-						<li class="list-group-item border-0 py-61 position-relative">
-							<v-field v-model="Email" type="text" name="email_format" id="email" :readonly="!Edit" class="form-control my-2 cake__textinput">{{ email }}</v-field>
-							<error-message name="email_format" class="position-absolute bottom-0 cake_pink fs_12"></error-message>
+							<h1 class="fs_40 cake_blue">{{ user.order_customer.customer_email }}</h1>
 						</li>
 					</ul>
 				</div>
@@ -63,6 +50,40 @@
 			<span class="cake_grey">Есть вопросы?</span>
 			<span class="cake_grey">Воспользуйтесь нашим <a href="https://vk.com/devmanorg" class="text-decoration-none cake_pink">чат-ботом</a>.</span>
 			<a class="btn text-white rounded-pill align-self-end px-5 mt-3 shadow-none cake__button cake__bg_pink" href="{% url 'logout' %}">Выйти</a>
+		</div>
+
+		{% else %}
+				<div>
+					<ul class="list-group">
+						<li class="list-group-item border-0 ps-0">
+							<h1 class="fs_40 cake_blue">
+								<a href="{% url 'signup' %}">Зарегистрироваться</a>
+							</h1>
+						</li>
+						<li class="list-group-item border-0 ps-0">
+							<h1 class="fs_40 cake_blue">
+								<a href="{% url 'login' %}">Войти</a></span>
+							</h1>
+						</li>
+					</ul>
+				</div>
+					<!-- <ul class="list-group">
+						<li class="list-group-item border-0 py-61 position-relative">
+							<v-field v-model="Name" type="text" name="name_format" id="name" :readonly="!Edit" class="form-control my-2 i cake__textinput">{{ user.customer_name }}</v-field>
+							<error-message name="name_format" class="position-absolute bottom-0 cake_pink fs_12"></error-message>
+						</li>
+						<li class="list-group-item border-0 py-61 position-relative">
+							<v-field v-model="Phone" type="text" name="phone_format" id="phone" :readonly="!Edit" class="form-control my-2 cake__textinput">{{ user.customer_phone }}</v-field>
+							<error-message name="phone_format" class="position-absolute bottom-0 cake_pink fs_12"></error-message>
+						</li>
+						<li class="list-group-item border-0 py-61 position-relative">
+							<v-field v-model="Email" type="text" name="email_format" id="email" :readonly="!Edit" class="form-control my-2 cake__textinput">{{ user.customer_email }}</v-field>
+							<error-message name="email_format" class="position-absolute bottom-0 cake_pink fs_12"></error-message>
+						</li>
+					</ul> -->
+		{% endif %}
+			</v-form>
+			<span class="cake_grey">Воспользуйтесь нашим <a href="https://vk.com/devmanorg" class="text-decoration-none cake_pink">чат-ботом</a>.</span>
 		</div>
 	</div>
 </div>
