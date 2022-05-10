@@ -84,10 +84,10 @@ class Cake(models.Model):
         ('Strawberry', 'Клубника'),
     )
     berries = models.CharField(
-        'Ягоды', choices=BERRIES, blank=True, max_length=20,
+        'Ягоды', choices=BERRIES, max_length=20,
     )
     decor = models.CharField(
-        'Декор', choices=CAKE_DECORS, blank=True, max_length=20,
+        'Декор', choices=CAKE_DECORS, max_length=20,
     )
     title = models.CharField('Надпись', max_length=200, blank=True)
 
