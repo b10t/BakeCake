@@ -135,8 +135,8 @@ def save_cake(levels, shape, toppings, berries, decor, title, price):
 
 
 class Order(models.Model):
-    customer = models.OneToOneField(
-        'Customer', verbose_name='Покупатель', on_delete=models.DO_NOTHING, null=True, related_name='order_customer'
+    customer = models.ForeignKey(
+        'Customer', verbose_name='Покупатель', on_delete=models.CASCADE, null=True, related_name='order_customer'
     )
     cake = models.OneToOneField(
         Cake, verbose_name='Торт', on_delete=models.CASCADE, related_name='order_cake'
@@ -155,8 +155,8 @@ class Order(models.Model):
 
 
 class Customer(models.Model):
-    customer = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, related_name='customer_user')
+    customer = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='customer_user')
     customer_name = models.CharField('Имя', max_length=60)
     customer_email = models.EmailField(
         'Электронная почта', max_length=254, unique=False)

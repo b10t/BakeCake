@@ -90,6 +90,7 @@ def processing_orders(request):
         if user.is_authenticated:
             pass
             # Создаём заказ и переходим в ЛК
+            return render(request, 'lk.html', context)
         else:
             email = post["EMAIL"]
 
