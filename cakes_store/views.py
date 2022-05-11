@@ -28,30 +28,31 @@ def save_order_to_session(request):
 def create_order(request):
     """Создание заказа."""
     user = request.user
-    order_context = request.session['order']
+    if 'order' in request.session:
+        order_context = request.session['order']
 
-    cake = Cake()
-    cake.berries = order_context.get('berries', '0')
-    cake.decor = order_context.get('decor', '0')
-    cake.words = order_context.get('words')
-    cake.levels = order_context.get('levels')
-    cake.topping = order_context.get('topping')
-    cake.price = float(order_context.get('price'))
-    cake.form = order_context.get('form')
-    cake.save()
+        cake = Cake()
+        cake.berries = order_context.get('berries', '0')
+        cake.decor = order_context.get('decor', '0')
+        cake.words = order_context.get('words')
+        cake.levels = order_context.get('levels')
+        cake.topping = order_context.get('topping')
+        cake.price = float(order_context.get('price'))
+        cake.form = order_context.get('form')
+        cake.save()
 
-    order = Order()
-    order.customer = user
-    order.cake = cake
-    order.customer_name = order_context.get('name')
-    order.customer_email = order_context.get('email')
-    order.order_address = order_context.get('address')
-    order.delivery_date = order_context.get('date')
-    order.delivery_time = order_context.get('time')
-    order.comment = order_context.get('comments')
-    order.save()
+        order = Order()
+        order.customer = user
+        order.cake = cake
+        order.customer_name = order_context.get('name')
+        order.customer_email = order_context.get('email')
+        order.order_address = order_context.get('address')
+        order.delivery_date = order_context.get('date')
+        order.delivery_time = order_context.get('time')
+        order.comment = order_context.get('comments')
+        order.save()
 
-    del request.session['order']
+        del request.session['order']
 
 
 def index(request):
@@ -64,6 +65,8 @@ def lk(request):
     user = request.user
     try:
         if user.is_authenticated:
+            create_order(request)
+
             orders = user.order_customer.all()
             context = {
                 'orders': orders,
@@ -126,10 +129,10 @@ def processing_orders(request):
 
             if User.objects.filter(email=email).exists():
                 # Отправляем на вход
-                pass
+                return redirect('login')
             else:
                 # Отправляем на регистрацию
-                return redirect('login')
+                return redirect('signup')
 
                 # new_cake = save_cake(
                 #     levels=Cake.CAKE_LEVELS[int(request.POST["LEVELS"]) - 1][0],
