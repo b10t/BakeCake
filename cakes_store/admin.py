@@ -23,6 +23,6 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('cake',)
 
 
-@admin.register(Customer)
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('customer_name',)
+# @admin.register(Customer)
+# class CustomerAdmin(admin.ModelAdmin):
+#     list_display = ('customer_name',)

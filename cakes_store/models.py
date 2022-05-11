@@ -112,7 +112,7 @@ class Cake(models.Model):
                 {self.get_berries_display()}, \
                 {self.get_decor_display()}, \
                 {self.get_levels_display()}, \
-                {self.get_toppings_display()}, \
+                {self.get_topping_display()}, \
                 {self.get_form_display()}'
 
     class Meta:
@@ -136,7 +136,7 @@ def save_cake(levels, shape, toppings, berries, decor, title, price):
 
 class Order(models.Model):
     customer = models.ForeignKey(
-        'Customer', verbose_name='Покупатель', on_delete=models.CASCADE, null=True, related_name='order_customer'
+        User, verbose_name='Покупатель', on_delete=models.CASCADE, null=True, related_name='order_customer'
     )
     cake = models.OneToOneField(
         Cake, verbose_name='Торт', on_delete=models.CASCADE, related_name='order_cake'
@@ -147,7 +147,7 @@ class Order(models.Model):
     comment = models.TextField('Комментарий', blank=True)
 
     def __str__(self):
-        return f'Покупатель: {self.customer.customer_name}. Торт: "{self.cake}"'
+        return f'Покупатель: {self.customer.username}. Торт: "{self.cake}"'
 
     class Meta:
         verbose_name = 'Заказ'

@@ -1,3 +1,4 @@
+from email.policy import default
 import string
 
 from django.core.mail import EmailMessage
@@ -25,6 +26,33 @@ def save_order_to_session(request):
     request.session['order'] = order
 
 
+def create_order(request):
+    """Создание заказа."""
+    user = request.user
+    order_context = request.session['order']
+
+    cake = Cake()
+    cake.berries = order_context.get('berries', '0')
+    cake.decor = order_context.get('decor', '0')
+    cake.words = order_context.get('words')
+    cake.levels = order_context.get('levels')
+    cake.topping = order_context.get('topping')
+    cake.price = float(order_context.get('price'))
+    cake.form = order_context.get('form')
+    cake.save()
+
+    order = Order()
+    order.customer = user
+    order.cake = cake
+    order.order_address = order_context.get('address')
+    order.delivery_date = order_context.get('date')
+    order.delivery_time = order_context.get('time')
+    order.comment = order_context.get('comments')
+    order.save()
+
+    del request.session['order']
+
+
 def index(request):
     context = {}
     return render(request, 'index.html', context)
@@ -35,12 +63,13 @@ def lk(request):
     user = request.user
     try:
         if user.is_authenticated:
-            order = Order.objects.get(customer=user.order_customer)
+            orders = user.order_customer.all()
             context = {
-                'order': order,
+                'orders': orders,
             }
         return render(request, 'lk.html', context)
-    except Exception:
+    except Exception as error:
+        context = {'error': error}
         return render(request, 'lk.html', context)
 
 
@@ -88,8 +117,8 @@ def processing_orders(request):
         save_order_to_session(request)
 
         if user.is_authenticated:
-            pass
-            # Создаём заказ и переходим в ЛК
+            create_order(request)
+
             return render(request, 'lk.html', context)
         else:
             email = post["EMAIL"]
