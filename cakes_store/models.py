@@ -141,6 +141,14 @@ class Order(models.Model):
     cake = models.OneToOneField(
         Cake, verbose_name='Торт', on_delete=models.CASCADE, related_name='order_cake'
     )
+    customer_name = models.CharField(
+        'Имя', max_length=60, default=''
+    )
+    customer_email = models.EmailField(
+        'Электронная почта',
+        max_length=254,
+        default=''
+    )
     order_address = models.CharField('Адрес', max_length=250)
     delivery_date = models.DateField('Дата доставки')
     delivery_time = models.TimeField('Время доставки')

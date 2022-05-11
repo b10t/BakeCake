@@ -43,6 +43,8 @@ def create_order(request):
     order = Order()
     order.customer = user
     order.cake = cake
+    order.customer_name = order_context.get('name')
+    order.customer_email = order_context.get('email')
     order.order_address = order_context.get('address')
     order.delivery_date = order_context.get('date')
     order.delivery_time = order_context.get('time')
@@ -118,7 +120,7 @@ def processing_orders(request):
         if user.is_authenticated:
             create_order(request)
 
-            return render(request, 'lk.html', context)
+            return redirect('lk')
         else:
             email = post["EMAIL"]
 
