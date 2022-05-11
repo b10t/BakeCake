@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-from email.policy import default
 import os
 from pathlib import Path
 
@@ -27,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY', 'django-insecure-_hmid6af8#v)no6*%--ftl(4*h2x!$e)-5s04-g%foxt8kq+ff')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = env.bool('DEBUG', False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOST', default='')
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -141,7 +140,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = env.str('EMAIL_HOST')
-EMAIL_HOST_USER = env.str('EMAIL_USER')
-EMAIL_HOST_PASSWORD = env.str('EMAIL_PASSWORD')
-EMAIL_PORT = env.str('EMAIL_PORT')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'bake.cake.dvm8@gmail.com'
+EMAIL_HOST_PASSWORD = 'Cake12345'
+EMAIL_PORT = 587
