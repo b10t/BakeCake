@@ -108,7 +108,7 @@ class Cake(models.Model):
     )
 
     def __str__(self):
-        return f'{self.words}, \
+        return f'Торт # {self.words}, \
                 {self.get_berries_display()}, \
                 {self.get_decor_display()}, \
                 {self.get_levels_display()}, \
@@ -118,20 +118,6 @@ class Cake(models.Model):
     class Meta:
         verbose_name = 'Торт'
         verbose_name_plural = 'Торты'
-
-
-def save_cake(levels, shape, toppings, berries, decor, title, price):
-    new_cake = Cake(
-        levels=levels,
-        shape=shape,
-        toppings=toppings,
-        berries=berries,
-        decor=decor,
-        title=title,
-        price=price
-    )
-    new_cake.save()
-    return new_cake
 
 
 class Order(models.Model):
@@ -160,42 +146,3 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
-
-
-# class Customer(models.Model):
-#     customer = models.OneToOneField(
-#         User, on_delete=models.CASCADE, related_name='customer_user')
-#     customer_name = models.CharField('Имя', max_length=60)
-#     customer_email = models.EmailField(
-#         'Электронная почта', max_length=254, unique=False)
-#     customer_phone = PhoneNumberField(
-#         verbose_name='Номер телефона', region='RU')
-
-#     def __str__(self):
-#         return f'{self.customer_name}, {self.customer_email}, {self.customer}'
-
-
-def save_order(cake, customer, address, delivery_date, delivery_time, comment):
-    new_order = Order(
-        cake=cake,
-        customer=customer,
-        order_address=address,
-        delivery_date=delivery_date,
-        delivery_time=delivery_time,
-        comment=comment
-    )
-    new_order.save()
-    return new_order
-
-
-def link_customer_to_user(customer_email):
-    system_email = 'system@bakecake.ru'
-    system_user = User.objects.get(email=system_email)
-    customer = Customer.objects.filter(
-        customer_email=system_email, customer=system_user).order_by('-id')[0]
-    registered_user = User.objects.get(email=customer_email)
-    customer.customer = registered_user
-    customer.customer_name = registered_user.username
-    customer.customer_email = customer_email
-    customer.save()
-    return customer
