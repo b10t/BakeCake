@@ -91,29 +91,29 @@ class Cake(models.Model):
     decor = models.CharField(
         'Декор', choices=CAKE_DECORS, max_length=1, default='0'
     )
-    title = models.CharField(
+    words = models.CharField(
         'Надпись', max_length=200, blank=True
     )
     levels = models.CharField(
         'Уровни', choices=CAKE_LEVELS, max_length=1,
     )
-    toppings = models.CharField(
+    topping = models.CharField(
         'Топпинг', choices=CAKE_TOPPINGS, max_length=1,
     )
     price = models.DecimalField(
         'Цена', max_digits=8, decimal_places=2
     )
-    shape = models.CharField(
+    form = models.CharField(
         'Форма', choices=CAKE_SHAPES, max_length=1,
     )
 
     def __str__(self):
-        return f'{self.title}, \
+        return f'{self.words}, \
                 {self.get_berries_display()}, \
                 {self.get_decor_display()}, \
                 {self.get_levels_display()}, \
                 {self.get_toppings_display()}, \
-                {self.get_shape_display()}'
+                {self.get_form_display()}'
 
     class Meta:
         verbose_name = 'Торт'
