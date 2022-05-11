@@ -1,6 +1,6 @@
 import re
 import string
-from turtle import fd
+# from turtle import fd
 from django.utils.crypto import get_random_string
 from django.shortcuts import render, redirect
 from cakes_store.models import User, Customer, Order, Cake, save_cake, save_order
