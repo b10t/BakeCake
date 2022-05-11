@@ -302,6 +302,7 @@
           <input v-model="Dates" type="date" name="DATE">
           <input v-model="Time" type="time" name="TIME">
           <input v-model="DelivComments" type="text" name="DELIVCOMMENTS">
+          <input v-model="Cost" type="text" name="COST">
           <button type="submit" ref="HiddenFormSubmit">Submit Order</button>
         </form>
         <v-form :validation-schema="schema2" @submit="this.$refs.HiddenFormSubmit.click()">
