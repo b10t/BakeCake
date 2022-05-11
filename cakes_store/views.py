@@ -31,6 +31,8 @@ def create_order(request):
     if 'order' in request.session:
         order_context = request.session['order']
 
+        promo = order_context.get('promo', '').upper()
+
         cake = Cake()
         cake.berries = order_context.get('berries', '0')
         cake.decor = order_context.get('decor', '0')
@@ -39,6 +41,12 @@ def create_order(request):
         cake.topping = order_context.get('topping')
         cake.price = float(order_context.get('price'))
         cake.form = order_context.get('form')
+
+        if promo.upper() == 'DEVMAN':
+            cake.price = cake.price * 0.8
+        else:
+            promo = ''
+
         cake.save()
 
         order = Order()
@@ -50,6 +58,7 @@ def create_order(request):
         order.delivery_date = order_context.get('date')
         order.delivery_time = order_context.get('time')
         order.comment = order_context.get('comments')
+        order.promo = promo
         order.save()
 
         del request.session['order']
