@@ -139,6 +139,7 @@ class Order(models.Model):
     delivery_date = models.DateField('Дата доставки')
     delivery_time = models.TimeField('Время доставки')
     comment = models.TextField('Комментарий', blank=True)
+    promo = models.CharField('Промо код', max_length=12, blank=True, null=True)
 
     def __str__(self):
         return f'Покупатель: {self.customer.username}. Торт: "{self.cake}"'
