@@ -15,9 +15,14 @@ def get_random_password(password_len=8):
     return password
 
 
-def save_cake_to_session(post):
+def save_order_to_session(request):
     """Сохраняет параметры торта в сессию."""
-    pass
+    order = request.POST.dict()
+
+    del order['csrfmiddlewaretoken']
+    order = dict((k.lower(), v) for k, v in order.items())
+
+    request.session['order'] = order
 
 
 def index(request):
@@ -80,7 +85,7 @@ def processing_orders(request):
 
         post = request.POST
 
-        save_cake_to_session(request.POST)
+        save_order_to_session(request)
 
         if user.is_authenticated:
             pass
