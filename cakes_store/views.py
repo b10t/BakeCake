@@ -98,7 +98,7 @@ def processing_orders(request):
                 pass
             else:
                 # Отправляем на регистрацию
-                pass
+                return redirect('login')
 
                 # new_cake = save_cake(
                 #     levels=Cake.CAKE_LEVELS[int(request.POST["LEVELS"]) - 1][0],

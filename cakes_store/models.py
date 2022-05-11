@@ -37,7 +37,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = CustomManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username',]
+    REQUIRED_FIELDS = ['username', ]
 
     def __str__(self):
         return f'{self.username}, {self.email if self.email else "no email"}'
@@ -51,13 +51,13 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Cake(models.Model):
     CAKE_TOPPINGS = (
-        ('Without', 'Без топпинга'),
-        ('White sauce', 'Белый соус'),
-        ('Caramel', 'Карамельный'),
-        ('Maple', 'Кленовый'),
-        ('Blueberry', 'Черничный'),
-        ('Milk chocolate', 'Молочный шоколад'),
-        ('Strawberry', 'Клубничный'),
+        ('1', 'Без топпинга'),
+        ('2', 'Белый соус'),
+        ('3', 'Карамельный'),
+        ('4', 'Кленовый'),
+        ('5', 'Черничный'),
+        ('6', 'Молочный шоколад'),
+        ('7', 'Клубничный'),
     )
     CAKE_LEVELS = (
         ('1', '1 уровень'),
@@ -65,43 +65,55 @@ class Cake(models.Model):
         ('3', '3 уровня'),
     )
     CAKE_SHAPES = (
-        ('circle', 'Круг'),
-        ('square', 'Квадрат'),
-        ('rectangle', 'Прямоугольник'),
+        ('1', 'Круг'),
+        ('2', 'Квадрат'),
+        ('3', 'Прямоугольник'),
     )
     CAKE_DECORS = (
-        ('Pistachios', 'Фисташки'),
-        ('Meringue', 'Безе'),
-        ('Hazelnuts', 'Фундук'),
-        ('Pecan', 'Пекан'),
-        ('Marshmallow', 'Маршмеллоу'),
-        ('Marzipan', 'Марципан'),
+        ('0', 'Нет'),
+        ('1', 'Фисташки'),
+        ('2', 'Безе'),
+        ('3', 'Фундук'),
+        ('4', 'Пекан'),
+        ('5', 'Маршмеллоу'),
+        ('6', 'Марципан'),
     )
     BERRIES = (
-        ('Blackberry', 'Ежевика'),
-        ('Raspberry', 'Малина'),
-        ('Blueberry', 'Голубика'),
-        ('Strawberry', 'Клубника'),
+        ('0', 'Нет'),
+        ('1', 'Ежевика'),
+        ('2', 'Малина'),
+        ('3', 'Голубика'),
+        ('4', 'Клубника'),
     )
     berries = models.CharField(
-        'Ягоды', choices=BERRIES, max_length=20,
+        'Ягоды', choices=BERRIES, max_length=1, default='0'
     )
     decor = models.CharField(
-        'Декор', choices=CAKE_DECORS, max_length=20,
+        'Декор', choices=CAKE_DECORS, max_length=1, default='0'
     )
-    title = models.CharField('Надпись', max_length=200, blank=True)
-
+    title = models.CharField(
+        'Надпись', max_length=200, blank=True
+    )
     levels = models.CharField(
-        'Уровни', choices=CAKE_LEVELS, max_length=20,
+        'Уровни', choices=CAKE_LEVELS, max_length=1,
     )
     toppings = models.CharField(
-        'Топпинг', choices=CAKE_TOPPINGS, max_length=20,
+        'Топпинг', choices=CAKE_TOPPINGS, max_length=1,
     )
-    price = models.DecimalField('Цена', max_digits=8, decimal_places=2)
-    shape = models.CharField('Форма', choices=CAKE_SHAPES, max_length=20, default='Circle')
+    price = models.DecimalField(
+        'Цена', max_digits=8, decimal_places=2
+    )
+    shape = models.CharField(
+        'Форма', choices=CAKE_SHAPES, max_length=1,
+    )
 
     def __str__(self):
-        return f'{self.title}, {self.berries}, {self.decor}, {self.levels}, {self.toppings}, {self.shape}'
+        return f'{self.title}, \
+                {self.get_berries_display()}, \
+                {self.get_decor_display()}, \
+                {self.get_levels_display()}, \
+                {self.get_toppings_display()}, \
+                {self.get_shape_display()}'
 
     class Meta:
         verbose_name = 'Торт'
@@ -143,10 +155,13 @@ class Order(models.Model):
 
 
 class Customer(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='customer_user')
+    customer = models.ForeignKey(
+        User, on_delete=models.DO_NOTHING, related_name='customer_user')
     customer_name = models.CharField('Имя', max_length=60)
-    customer_email = models.EmailField('Электронная почта', max_length=254, unique=False)
-    customer_phone = PhoneNumberField(verbose_name='Номер телефона', region='RU')
+    customer_email = models.EmailField(
+        'Электронная почта', max_length=254, unique=False)
+    customer_phone = PhoneNumberField(
+        verbose_name='Номер телефона', region='RU')
 
     def __str__(self):
         return f'{self.customer_name}, {self.customer_email}, {self.customer}'
@@ -168,7 +183,8 @@ def save_order(cake, customer, address, delivery_date, delivery_time, comment):
 def link_customer_to_user(customer_email):
     system_email = 'system@bakecake.ru'
     system_user = User.objects.get(email=system_email)
-    customer = Customer.objects.filter(customer_email=system_email, customer=system_user).order_by('-id')[0]
+    customer = Customer.objects.filter(
+        customer_email=system_email, customer=system_user).order_by('-id')[0]
     registered_user = User.objects.get(email=customer_email)
     customer.customer = registered_user
     customer.customer_name = registered_user.username
