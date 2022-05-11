@@ -56,11 +56,13 @@ def create_order(request):
 
 
 def index(request):
+    """Главная страница"""
     context = {}
     return render(request, 'index.html', context)
 
 
 def lk(request):
+    """Передает данные в ЛК"""
     context = {}
     user = request.user
     try:
@@ -77,12 +79,8 @@ def lk(request):
         return render(request, 'lk.html', context)
 
 
-def login(request):
-    context = {}
-    return render(request, 'login.html', context)
-
-
 def signup(request):
+    """Регистрация пользователя"""
     context = {}
     try:
         if request.method == 'POST':
@@ -134,32 +132,4 @@ def processing_orders(request):
                 # Отправляем на регистрацию
                 return redirect('signup')
 
-                # new_cake = save_cake(
-                #     levels=Cake.CAKE_LEVELS[int(request.POST["LEVELS"]) - 1][0],
-                #     shape=Cake.CAKE_SHAPES[int(request.POST["FORM"]) - 1][0],
-                #     toppings=Cake.CAKE_TOPPINGS[int(request.POST["TOPPING"]) - 1][0],
-                #     berries=Cake.BERRIES[int(request.POST["BERRIES"]) - 1][0],
-                #     decor=Cake.CAKE_DECORS[int(request.POST["DECOR"]) - 1][0],
-                #     title=request.POST["WORDS"],
-                #     price=123.45
-                # )
-                # try:
-                #     customer = Customer.objects.get(email=request.POST["EMAIL"])
-                # except Exception:
-                #     customer = Customer(
-                #         customer=User.objects.get(email='system@bakecake.ru'),
-                #         customer_name='temporary',
-                #         customer_email=request.POST["EMAIL"],
-                #         customer_phone=request.POST["PHONE"]
-                #     )
-                #     customer.save()
-
-                # new_order = save_order(
-                #     cake=new_cake,
-                #     customer=customer,
-                #     address=request.POST["ADDRESS"],
-                #     delivery_date=request.POST["DATE"],
-                #     delivery_time=request.POST["TIME"],
-                #     comment=request.POST["COMMENTS"]
-                # )
     return render(request, 'index.html', context)
