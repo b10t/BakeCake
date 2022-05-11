@@ -4,6 +4,7 @@ import string
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
 from django.utils.crypto import get_random_string
+from django.contrib.sites.shortcuts import get_current_site
 
 from cakes_store.models import (Cake, Order, User)
 
@@ -90,6 +91,7 @@ def lk(request):
 
 def signup(request):
     """Регистрация пользователя"""
+    current_site = get_current_site(request)
     context = {}
     try:
         if request.method == 'POST':
@@ -101,8 +103,12 @@ def signup(request):
                 email=email,
                 username=email,
             )
-            subject_message = 'CakeBake'
-            message = f'Ваш пароль: {password}'
+            subject_message = 'Вы успешно зарегестрированы на CakeBake'
+            message = f'''
+            Чтобы войти пройдите по ссылке: https://{current_site.domain}/users/login/
+            Ваш логин: {email}
+            Ваш пароль: {password}
+            '''
             EmailMessage(
                 subject=subject_message,
                 body=message,
