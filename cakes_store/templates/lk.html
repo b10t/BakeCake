@@ -24,38 +24,40 @@
 				</div>
 			</v-form>
 			<h2 class="fs_40 cake_pink mt-5">Мои заказы</h2>
-			{% if order %}
-				<section class="my-2">
-					<span class="cake_blue lk__order d-flex" data-bs-toggle="modal" data-bs-target="#OrderModal2">
-						<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
-							<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-						</svg>
-						<span class="ms-1">Торт #{{ order.id }}</span>
-					</span>
-					<aside class="modal fade" id="OrderModal2" tabindex="-1" aria-labelledby="ModalLabel2" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title cake_pink" id="ModalLabel2">Торт #{{ order.id }}</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									<span class="cake_blue">Уровней: {{ order.cake.get_levels_display }}</span><br>
-									<span class="cake_blue">Форма: {{ order.cake.get_shape_display }}</span><br>
-									<span class="cake_blue">Топпинг: {{ order.cake.get_toppings_display }}</span><br>
-									<span class="cake_blue">Ягоды: {{ order.cake.get_berries_display }}</span><br>
-									<span class="cake_blue">Декор: {{ order.cake.get_decor_display }}</span><br>
-									<span class="cake_blue">{% if order.cake.title %} {{ order.cake.title }} {% else %}  Без надписи {% endif %} </span><br>
-									<span class="cake_pink">Цена: {{ order.cake.price }} </span>
-								</div>
-								<div class="modal-footer d-flex justify-content-between">
-									<span class="cake_blue d-flex"> Статус: {{ order.delivery_date }} </span>
-									<span class="cake_blue d-flex align-items-center">Время доставки: {{ order.delivery_time }}</span>
-								</div>
-							</div>
-						</div>
-					</aside>
-				</section>
+			{% if orders %}
+        {% for order in orders %}
+          <section class="my-2">
+            <span class="cake_blue lk__order d-flex" data-bs-toggle="modal" data-bs-target="#OrderModal2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+              </svg>
+              <span class="ms-1">Торт #{{ order.id }}</span>
+            </span>
+            <aside class="modal fade" id="OrderModal2" tabindex="-1" aria-labelledby="ModalLabel2" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title cake_pink" id="ModalLabel2">Торт #{{ order.id }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <span class="cake_blue">Уровней: {{ order.cake.get_levels_display }}</span><br>
+                    <span class="cake_blue">Форма: {{ order.cake.get_form_display }}</span><br>
+                    <span class="cake_blue">Топпинг: {{ order.cake.get_topping_display }}</span><br>
+                    <span class="cake_blue">Ягоды: {{ order.cake.get_berries_display }}</span><br>
+                    <span class="cake_blue">Декор: {{ order.cake.get_decor_display }}</span><br>
+                    <span class="cake_blue">{% if order.cake.title %} {{ order.cake.title }} {% else %}  Без надписи {% endif %} </span><br>
+                    <span class="cake_pink">Цена: {{ order.cake.price }} </span>
+                  </div>
+                  <div class="modal-footer d-flex justify-content-between">
+                    <span class="cake_blue d-flex"> Статус: {{ order.delivery_date }} </span>
+                    <span class="cake_blue d-flex align-items-center">Время доставки: {{ order.delivery_time }}</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </section>
+        {% endfor %}
 			{% else %}
 			<li class="list-group-item border-0 ps-0">
 				<span class="fs_40 cake_blue">У вас нет заказов</span>

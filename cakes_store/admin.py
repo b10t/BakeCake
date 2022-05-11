@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from cakes_store.models import Cake, Order, User, Customer
+from cakes_store.models import Cake, Order, User
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 from cakes_store.forms import UserCreationForm
@@ -23,6 +23,6 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('cake',)
 
 
-@admin.register(Customer)
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('customer_name',)
+# @admin.register(Customer)
+# class CustomerAdmin(admin.ModelAdmin):
+#     list_display = ('customer_name',)
