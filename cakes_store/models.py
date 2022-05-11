@@ -154,17 +154,17 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
 
 
-class Customer(models.Model):
-    customer = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name='customer_user')
-    customer_name = models.CharField('Имя', max_length=60)
-    customer_email = models.EmailField(
-        'Электронная почта', max_length=254, unique=False)
-    customer_phone = PhoneNumberField(
-        verbose_name='Номер телефона', region='RU')
+# class Customer(models.Model):
+#     customer = models.OneToOneField(
+#         User, on_delete=models.CASCADE, related_name='customer_user')
+#     customer_name = models.CharField('Имя', max_length=60)
+#     customer_email = models.EmailField(
+#         'Электронная почта', max_length=254, unique=False)
+#     customer_phone = PhoneNumberField(
+#         verbose_name='Номер телефона', region='RU')
 
-    def __str__(self):
-        return f'{self.customer_name}, {self.customer_email}, {self.customer}'
+#     def __str__(self):
+#         return f'{self.customer_name}, {self.customer_email}, {self.customer}'
 
 
 def save_order(cake, customer, address, delivery_date, delivery_time, comment):

@@ -5,8 +5,7 @@ from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
 from django.utils.crypto import get_random_string
 
-from cakes_store.models import (Cake, Customer, Order, User, save_cake,
-                                save_order)
+from cakes_store.models import (Cake, Order, User)
 
 
 def get_random_password(password_len=8):
